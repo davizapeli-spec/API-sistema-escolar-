@@ -1,10 +1,11 @@
 import http from "http";
-import app from  "./app";
+import app from "./app";
 
-// Cria o servidor HTTP usando regras do app 
+// Cria o servidor HTTO usando as regras do app
+const server = http.createServer(app);
 
-// Define a porta do servidor 
+// Define a porta do servidor
 const PORT = process.env.PORT || 8080;
 
-// Iniciar o servidor 
-server.listen(PORT, () => console.info("Servidor escutando na porta ${PORT}") )
+// Incia o servidor
+server.listen(PORT, () => console.log("Servidor escutando na porta ", PORT));
