@@ -8,4 +8,4 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 8080;
 
 // Incia o servidor
-server.listen(PORT, () => console.log("Servidor escutando na porta ", PORT));
+server.listen(PORT, () => console.log("Servidor escutando na porta ", PORT)),0
