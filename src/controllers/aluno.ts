@@ -68,11 +68,11 @@ export default {
             const { id } = request.params;
             const { matricula, nome, email, telefone, endereco, cpf, nascimento } =
                 request.body;
-       
-       
-       
-             const aluno = await prisma.aluno.update({
-                where:{
+
+
+
+            const aluno = await prisma.aluno.update({
+                where: {
                     id: +id,
 
                 },
@@ -80,16 +80,30 @@ export default {
                     matricula,
                     nome,
                     nascimento: nascimento ? new Date(nascimento) : undefined,
-                   email,
-                   telefone,
-                   endereco,
+                    email,
+                    telefone,
+                    endereco,
                 }
-             })
+            })
 
-           return response.status(200).json(aluno);
-            } catch (e) {
+            return response.status(200).json(aluno);
+        } catch (e) {
+            return handleErrors(e, response);
+        }
+    },
+
+    delete: async (request: Request, response: Response) => {
+        try {
+            const { id } = request.params;
+
+            const aluno = await prisma.aluno.delete({
+                where: {
+                    id: +id,
+                }
+            })
+            return response.status(200).json(aluno);
+        } catch (e) {
             return handleErrors(e, response);
         }
     }
 }
-
