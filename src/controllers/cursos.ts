@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../../config/prisma';
-import { handleErrors } from '../helpers/handleErros';
+import { handleErrors } from '../helpers/handleErrors';
 
 export default {
     list: async (request: Request, response: Response) => {

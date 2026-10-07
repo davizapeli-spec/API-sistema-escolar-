@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { prisma } from "../../config/prisma";
-import { handleErrors } from "../helpers/handleErros";
+import { handleErrors } from "../helpers/handleErrors";
 
 export default {
     create: async (request: Request, response: Response) => {
@@ -19,9 +19,10 @@ export default {
                     cursos: {
                         connect: cursosIds.map((cursoId: number) => ({ id: cursoId })),
                     },
-                    include: {
-                        cursos: cursosIds.map
-                    }
+
+                },
+                include: {
+                    cursos: true
                 }
             })
 
