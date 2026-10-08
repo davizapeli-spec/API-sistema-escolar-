@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { prisma } from "../../config/prisma";
+import jwt from "jsonwebtoken";
 import { handleErrors } from "../helpers/handleErrors";
 import bcrypt from "bcrypt";
 
@@ -17,10 +18,19 @@ export default {
                 },
             });
 
-            if (!funcionario) {
+            if (!funcionario || !bcrypt.compareSync(senha, funcionario.senha)) {
                 return response.status(404).json("email ou senha inválidos");
 
             }
+
+            const token = jwt.sign(
+                { id: funcionario.id, cargo: funcionario.cargo }, 
+                process.env.JWT_SECRET!,
+                {
+                    expiresIn: "1d"
+                }
+            )
+            return response.status(200).json(token)
         } catch (e) {
             return handleErrors(e, response);
         }
