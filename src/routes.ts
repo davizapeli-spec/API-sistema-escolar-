@@ -1,8 +1,9 @@
 import { Router } from "express";
 import alunoController from "./controllers/aluno";
-import cursosController from "./controllers/cursos"
+import cursoController from "./controllers/cursos"
 import matriculaController from "./controllers/matricula";
 import funcionarioController from "./controllers/funcionario"
+import { authentication } from "./middlewares/authentication";
 
 // Inicialzia o router
 const routes = Router();
@@ -15,27 +16,27 @@ routes.get("/", (request, response) => {
 
 
 
-// Rotas de alunos
-routes.get("/alunos", alunoController.list);
-routes.get("/alunos/:id", alunoController.getById);
-routes.post("/alunos", alunoController.create);
-routes.put("/alunos/:id", alunoController.update);
-routes.delete("/alunos/:id", alunoController.delete);
+
+ // Rotas de alunos
+routes.get('/alunos', authentication, alunoController.list);
+routes.get('/alunos/:id', authentication, alunoController.getById);
+routes.post('/alunos', authentication, alunoController.create);
+routes.put('/alunos/:id', authentication, alunoController.update);
+routes.delete('/alunos/:id', authentication, alunoController.delete);
 
 // Rotas de cursos
-routes.get("/cursos", cursosController.list);
-routes.get("/cursos/:id", cursosController.getById);
-routes.post("/cursos", cursosController.create);
-routes.put("/cursos/:id", cursosController.update);
-routes.delete("/cursos/:id", cursosController.delete);
+routes.get('/cursos', authentication, cursoController.list);
+routes.get('/cursos/:id', authentication, cursoController.getById);
+routes.post('/cursos', authentication, cursoController.create);
+routes.put('/cursos/:id', authentication, cursoController.update);
+routes.delete('/cursos/:id', authentication, cursoController.delete);
 
 // Rotas de matrículas
-routes.post("/matriculas/:id", matriculaController.create)
-routes.delete("/matriculas/:id", matriculaController.delete)
+routes.post('/matriculas/:id', authentication, matriculaController.create);
+routes.delete('/matriculas/:id', authentication, matriculaController.delete);
 
-
-// Rotas de funcionarios 
-routes.post("/login", funcionarioController.login);
-
+// Rotas de funcionários
+routes.post('/login', funcionarioController.login);
 
 export default routes;
+
