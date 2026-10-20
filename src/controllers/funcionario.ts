@@ -24,11 +24,11 @@ export default {
       }
 
       const token = jwt.sign(
-        { id: funcionario.id, cargo: funcionario.cargo,  },
-         process.env.JWT_SECRET!,
-         {
+        { id: funcionario.id, cargo: funcionario.cargo, },
+        process.env.JWT_SECRET!,
+        {
           expiresIn: "1d"
-         },
+        },
       );
 
       return response.status(200).json(token)
@@ -41,10 +41,10 @@ export default {
   list: async (request: Request, response: Response) => {
     try {
       const funcionarios = await prisma.funcionario.findMany({
-       omit: {
-        senha: true,
+        omit: {
+          senha: true,
 
-       },
+        },
       });
 
       return response.status(200).json(funcionarios);
@@ -59,9 +59,9 @@ export default {
       const funcionario = await prisma.funcionario.findUnique({
         where: {
           id: +id,
-           omit: {
-        senha: true,
-       },
+          omit: {
+            senha: true,
+          },
         },
       });
 
@@ -100,10 +100,10 @@ export default {
           endereco,
         },
 
-         omit: {
-        senha: true,
+        omit: {
+          senha: true,
 
-       },
+        },
       });
 
       return response.status(201).json(funcionario);
@@ -142,9 +142,9 @@ export default {
           telefone,
           endereco,
         },
-         omit: {
-        senha: true,
-       },
+        omit: {
+          senha: true,
+        },
       });
 
       return response.status(200).json(funcionario);
@@ -161,8 +161,8 @@ export default {
         where: {
           id: +id,
         },
-         omit: {
-        senha: true,
+        omit: {
+          senha: true,
         },
       });
 
