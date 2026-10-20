@@ -40,11 +40,14 @@ export default {
 
   list: async (request: Request, response: Response) => {
     try {
-      const alunos = await prisma.funcionario.findMany({
+      const funcionarios = await prisma.funcionario.findMany({
+       omit: {
+        senha: true,
 
+       },
       });
 
-      return response.status(200).json(alunos);
+      return response.status(200).json(funcionarios);
     } catch (e) {
       return handleErrors(e, response);
     }
@@ -56,6 +59,9 @@ export default {
       const funcionario = await prisma.funcionario.findUnique({
         where: {
           id: +id,
+           omit: {
+        senha: true,
+       },
         },
       });
 
@@ -93,6 +99,11 @@ export default {
           telefone,
           endereco,
         },
+
+         omit: {
+        senha: true,
+
+       },
       });
 
       return response.status(201).json(funcionario);
@@ -131,6 +142,9 @@ export default {
           telefone,
           endereco,
         },
+         omit: {
+        senha: true,
+       },
       });
 
       return response.status(200).json(funcionario);
@@ -146,6 +160,9 @@ export default {
       const funcionario = await prisma.funcionario.delete({
         where: {
           id: +id,
+        },
+         omit: {
+        senha: true,
         },
       });
 
