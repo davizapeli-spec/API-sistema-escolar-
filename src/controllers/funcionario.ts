@@ -59,9 +59,9 @@ export default {
       const funcionario = await prisma.funcionario.findUnique({
         where: {
           id: +id,
-          omit: {
-            senha: true,
-          },
+        },
+        omit: {
+          senha: true,
         },
       });
 
